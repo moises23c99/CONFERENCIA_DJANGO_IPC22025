@@ -1,0 +1,173 @@
+{% extends "simulador/base.html" %}
+
+{% block content %}
+<h2>Crear Nuevos Datos</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<!-- Formulario para Crear Nueva Categoría -->
+<h3>Crear Nueva Categoría</h3>
+<table class="table">
+    <form id="crearCategoriaForm" method="POST">
+        {% csrf_token %}
+        <tr>
+            <td><label for="id_categoria">ID Categoría:</label></td>
+            <td><input type="text" id="id_categoria" name="id_categoria" required></td>
+        </tr>
+        <tr>
+            <td><label for="nombreCategoria">Nombre:</label></td>
+            <td><input type="text" id="nombreCategoria" name="nombreCategoria" required></td>
+        </tr>
+        <tr>
+            <td><label for="descripcionCategoria">Descripción:</label></td>
+            <td><textarea id="descripcionCategoria" name="descripcionCategoria" required></textarea></td>
+        </tr>
+        <tr>
+            <td><label for="cargaTrabajo">Carga de trabajo (opcional):</label></td>
+            <td><input type="text" id="cargaTrabajo" name="cargaTrabajo"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Crear Categoría</button></td>
+        </tr>
+    </form>
+</table>
+
+<hr>
+
+<!-- Formulario para Crear Nuevo Recurso -->
+<h3>Crear Nuevo Recurso</h3>
+<table class="table">
+    <form method="POST" action="/api/crearRecurso">
+        <tr>
+            <td><label for="id_recurso">ID Recurso:</label></td>
+            <td><input type="text" id="id_recurso" name="id_recurso" required></td>
+        </tr>
+        <tr>
+            <td><label for="nombreRecurso">Nombre:</label></td>
+            <td><input type="text" id="nombreRecurso" name="nombreRecurso" required></td>
+        </tr>
+        <tr>
+            <td><label for="abreviaturaRecurso">Abreviatura:</label></td>
+            <td><input type="text" id="abreviaturaRecurso" name="abreviaturaRecurso" required></td>
+        </tr>
+        <tr>
+            <td><label for="metricaRecurso">Métrica:</label></td>
+            <td><input type="text" id="metricaRecurso" name="metricaRecurso" required></td>
+        </tr>
+        <tr>
+            <td><label for="tipoRecurso">Tipo:</label></td>
+            <td><input type="text" id="tipoRecurso" name="tipoRecurso" required></td>
+        </tr>
+        <tr>
+            <td><label for="valorXhoraRecurso">Valor/hora:</label></td>
+            <td><input type="number" id="valorXhoraRecurso" name="valorXhoraRecurso" step="0.01" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Crear Recurso</button></td>
+        </tr>
+    </form>
+</table>
+
+<hr>
+
+<!-- Formulario para Crear Nueva Configuración -->
+<h3>Crear Nueva Configuración</h3>
+<table class="table">
+    <form method="POST" action="/api/crearConfiguracion">
+        <tr>
+            <td><label for="id_configuracion">ID Configuración:</label></td>
+            <td><input type="text" id="id_configuracion" name="id_configuracion" required></td>
+        </tr>
+        <tr>
+            <td><label for="nombreConfiguracion">Nombre:</label></td>
+            <td><input type="text" id="nombreConfiguracion" name="nombreConfiguracion" required></td>
+        </tr>
+        <tr>
+            <td><label for="descripcionConfiguracion">Descripción:</label></td>
+            <td><textarea id="descripcionConfiguracion" name="descripcionConfiguracion" required></textarea></td>
+        </tr>
+        <tr>
+            <td><label for="id_categoria">ID Categoría:</label></td>
+            <td><input type="text" id="id_categoria" name="id_categoria" required></td>
+        </tr>
+        <tr>
+            <td><label for="parametrosConfiguracion">Parámetros (opcional):</label></td>
+            <td><textarea id="parametrosConfiguracion" name="parametrosConfiguracion"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Crear Configuración</button></td>
+        </tr>
+    </form>
+</table>
+
+<hr>
+
+<!-- Formulario para Crear Nuevo Cliente -->
+<h3>Crear Nuevo Cliente</h3>
+<table class="table">
+    <form method="POST" action="/api/crearCliente">
+        <tr>
+            <td><label for="id_cliente">ID Cliente:</label></td>
+            <td><input type="text" id="id_cliente" name="id_cliente" required></td>
+        </tr>
+        <tr>
+            <td><label for="nombreCliente">Nombre:</label></td>
+            <td><input type="text" id="nombreCliente" name="nombreCliente" required></td>
+        </tr>
+        <tr>
+            <td><label for="emailCliente">Correo Electrónico:</label></td>
+            <td><input type="email" id="emailCliente" name="emailCliente" required></td>
+        </tr>
+        <tr>
+            <td><label for="telefonoCliente">Teléfono (opcional):</label></td>
+            <td><input type="text" id="telefonoCliente" name="telefonoCliente"></td>
+        </tr>
+        <tr>
+            <td><label for="direccionCliente">Dirección (opcional):</label></td>
+            <td><input type="text" id="direccionCliente" name="direccionCliente"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Crear Cliente</button></td>
+        </tr>
+    </form>
+</table>
+
+<hr>
+
+<!-- Formulario para Crear Nueva Instancia -->
+<h3>Crear Nueva Instancia</h3>
+<table class="table">
+    <form method="POST" action="/api/crearInstancia">
+        <tr>
+            <td><label for="id_instancia">ID Instancia:</label></td>
+            <td><input type="text" id="id_instancia" name="id_instancia" required></td>
+        </tr>
+        <tr>
+            <td><label for="nombreInstancia">Nombre:</label></td>
+            <td><input type="text" id="nombreInstancia" name="nombreInstancia" required></td>
+        </tr>
+        <tr>
+            <td><label for="id_configuracion_instancia">ID Configuración:</label></td>
+            <td><input type="text" id="id_configuracion_instancia" name="id_configuracion_instancia" required></td>
+        </tr>
+        <tr>
+            <td><label for="fechaInicioInstancia">Fecha de Inicio:</label></td>
+            <td><input type="date" id="fechaInicioInstancia" name="fechaInicioInstancia" required></td>
+        </tr>
+        <tr>
+            <td><label for="estadoInstancia">Estado:</label></td>
+            <td><input type="text" id="estadoInstancia" name="estadoInstancia" required></td>
+        </tr>
+        <tr>
+            <td><label for="fechaFinalInstancia">Fecha Final (opcional):</label></td>
+            <td><input type="date" id="fechaFinalInstancia" name="fechaFinalInstancia"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Crear Instancia</button></td>
+        </tr>
+    </form>
+</table>
+
+{% endblock %}

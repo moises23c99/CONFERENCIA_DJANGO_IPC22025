@@ -1,0 +1,13 @@
+{% extends "simulador/base.html" %}
+{% block content %}
+
+<h1>Bienvenido al Simulador de Tecnologías Chapinas</h1>
+<p>Este sistema permite cargar configuraciones, visualizar recursos, clientes, y realizar consultas.</p>
+
+<div class="actions">
+    <a href="{% url 'cargar_configuracion' %}" class="btn">Cargar Archivo de Configuración</a>
+    <a href="{% url 'consultar_datos' %}" class="btn">Consultar Datos</a>
+    <a href="{% url 'crear_datos' %}" class="btn">Crear Datos</a>
+</div>
+
+{% endblock %}

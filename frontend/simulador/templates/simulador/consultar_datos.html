@@ -1,0 +1,171 @@
+{% extends "simulador/base.html" %}
+{% block content %}
+
+<h2>Consulta de Datos</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% else %}
+
+    <h3>Recursos</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Métrica</th>
+                <th>Valor/hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recurso in datos.listaRecursos.recurso %}
+                <tr>
+                    <td>{{ recurso.nombre }}</td>
+                    <td>{{ recurso.tipo }}</td>
+                    <td>{{ recurso.metrica }}</td>
+                    <td>{{ recurso.valorXhora }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Categorías</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Carga de Trabajo</th>
+                <th>Configuraciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in datos.listaCategorias.categoria %}
+                <tr>
+                    <td>{{ cat.nombre }}</td>
+                    <td><em>{{ cat.descripcion }}</em></td>
+                    <td>
+                        {% if cat.cargaTrabajo %}
+                            {% if cat.cargaTrabajo.0 and cat.cargaTrabajo.0|length > 1 %}
+                                {{ cat.cargaTrabajo|join:", " }}
+                            {% else %}
+                                {{ cat.cargaTrabajo }}
+                            {% endif %}
+                        {% else %}
+                            No definida
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if cat.listaConfiguraciones and cat.listaConfiguraciones.configuracion %}
+                            {% with cat.listaConfiguraciones.configuracion as configs %}
+                                {% if configs.nombre %}
+                                    <ul><li><strong>{{ configs.nombre }}</strong>: {{ configs.descripcion }}</li></ul>
+                                {% else %}
+                                    <ul>
+                                    {% for conf in configs %}
+                                        <li>
+                                            <strong>{{ conf.nombre }}</strong>: {{ conf.descripcion }}
+                                            {% if conf.recursosConfiguracion and conf.recursosConfiguracion.recurso %}
+                                                <ul>
+                                                    {% for r in conf.recursosConfiguracion.recurso %}
+                                                        <li>Recurso ID: {{ r.id_ }} - Cantidad: {{ r.text }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% endwith %}
+                        {% else %}
+                            <em>Sin configuraciones</em>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Clientes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>NIT</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in datos.listaClientes.cliente %}
+                <tr>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.usuario|default:"N/A" }}</td>
+                    <td>
+                        {% if cliente.id_ %}
+                            {{ cliente.id_ }}
+                        {% elif cliente.nit %}
+                            {{ cliente.nit }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if cliente.correoElectronico %}
+                            {{ cliente.correoElectronico }}
+                        {% elif cliente.email %}
+                            {{ cliente.email }}
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                    <td>{{ cliente.direccion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Instancias</h3>
+    {% for cliente in datos.listaClientes.cliente %}
+        <h4>{{ cliente.usuario }} (Instancias)</h4>
+        {% if cliente.listaInstancias and cliente.listaInstancias.instancia %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instancia</th>
+                        <th>Estado</th>
+                        <th>ID Configuración</th>
+                        <th>Fechas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% with cliente.listaInstancias.instancia as instancias %}
+                        {% if instancias.0 %}
+                            {% for inst in instancias %}
+                                <tr>
+                                    <td>{{ inst.nombre }}</td>
+                                    <td>{{ inst.estado }}</td>
+                                    <td>{{ inst.idConfiguracion }}</td>
+                                    <td>{{ inst.fechaInicio }} - {{ inst.fechaFinal|default:"-" }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>{{ instancias.nombre }}</td>
+                                <td>{{ instancias.estado }}</td>
+                                <td>{{ instancias.idConfiguracion }}</td>
+                                <td>{{ instancias.fechaInicio }} - {{ instancias.fechaFinal|default:"-" }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endwith %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Sin instancias registradas</p>
+        {% endif %}
+    {% endfor %}
+
+{% endif %}
+
+{% endblock %}

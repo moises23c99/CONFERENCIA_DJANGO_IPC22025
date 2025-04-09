@@ -1,0 +1,31 @@
+{% extends "simulador/base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Enviar mensaje de configuración</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar archivo</button>
+</form>
+
+{% if resultado %}
+    <h3>Resultado del procesamiento</h3>
+    <ul>
+        <li>{{ resultado.mensaje }}</li>
+        <li>Recursos: {{ resultado.recursos }}</li>
+        <li>Categorías: {{ resultado.categorias }}</li>
+        <li>Configuraciones: {{ resultado.configuraciones }}</li>
+        <li>Clientes creados: {{ resultado.clientes_creados }}</li>
+        <li>Instancias creadas: {{ resultado.instancias_creadas }}</li>
+    </ul>
+{% endif %}
+
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}

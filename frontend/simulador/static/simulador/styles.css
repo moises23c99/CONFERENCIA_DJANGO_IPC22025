@@ -1,0 +1,201 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #2c3e50;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    color: #2c3e50;
+}
+
+ul {
+    padding-left: 1.5rem;
+}
+
+.actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.7rem 1.2rem;
+    background-color: #2980b9;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #1c5980;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+/* Estilo para el contenedor del formulario */
+form {
+    background-color: #f9fbfd;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 30px auto;
+    font-family: Arial, sans-serif;
+    border: 1px solid #e0e0e0;
+}
+
+/* Título del formulario */
+form h3 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Estilo para los campos de texto */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+textarea {
+    width: 95%;
+    padding: 12px;
+    margin-bottom: 20px;  /* Aumentar espacio entre los campos */
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    background-color: #f9f9f9;  /* Fondo suave para los campos de entrada */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: #007bff;  /* Azul para los campos al enfocar */
+    outline: none;
+    background-color: #fff;  /* Cambiar fondo al foco */
+}
+
+/* Estilo para los botones */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);  /* Efecto de desplazamiento */
+}
+
+button:active {
+    background-color: #004085;  /* Cambio de color al hacer clic */
+    transform: translateY(1px);
+}
+
+/* Estilo para los labels */
+label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Estilo para los cuadros de texto (textareas) */
+textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+/* Estilo para los formularios dentro de la página */
+form hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 2px solid #e5e5e5;
+}
+
+/* Asegura un buen espacio entre las secciones del formulario */
+form > div {
+    margin-bottom: 40px;
+}
+
+/* Ajuste para los cuadros de texto de tipo 'input' */
+input[type="text"], input[type="email"], input[type="number"], input[type="date"], textarea {
+    background-color: #fafafa;
+}
+
+/* Añadir espacio adicional a los botones */
+button {
+    margin-top: 10px;
+}
+
+/* Estilo para el contorno de los campos */
+input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);  /* Resaltado del borde */
+}
+
+/* Otros pequeños ajustes */
+form hr {
+    border-top: 2px solid #007bff;
+    margin-top: 50px;
+}

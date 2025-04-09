@@ -1,0 +1,197 @@
+{% extends "simulador/base.html" %}
+
+{% block content %}
+<h2>Crear Nuevos Datos</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<!-- Formulario para Crear Nueva Categoría -->
+<h3>Crear Nueva Categoría</h3>
+<form id="crearCategoriaForm">
+    {% csrf_token %}
+    <label for="id_categoria">ID Categoría:</label>
+    <input type="text" id="id_categoria" name="id_categoria" required><br><br>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" required></textarea><br><br>
+
+    <label for="cargaTrabajo">Carga de trabajo (opcional):</label>
+    <input type="text" id="cargaTrabajo" name="cargaTrabajo"><br><br>
+
+    <button type="submit">Crear Categoría</button>
+</form>
+
+<script>
+    document.getElementById('crearCategoriaForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Evita que el formulario se envíe de forma tradicional
+
+        // Recolectamos los datos del formulario
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        // Enviamos los datos usando fetch
+        fetch('http://localhost:5000/api/crearCategoria', {  // Cambiado de 'ffetch' a 'fetch'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',  // Asegúrate de que el Content-Type sea 'application/json'
+            },
+            body: JSON.stringify(data),  // Convertimos los datos a JSON
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+            return response.json();  // Procesa la respuesta JSON
+        })
+        .then(data => {
+            if (data.mensaje) {
+                alert(data.mensaje);  // Mostrar el mensaje de éxito
+            } else if (data.error) {
+                alert(`Error: ${data.error}`);  // Mostrar el mensaje de error
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Ocurrió un error al enviar los datos.');
+        });
+    });
+</script>
+
+<hr>
+
+<!-- Formulario para Crear Nuevo Recurso -->
+<h3>Crear Nuevo Recurso</h3>
+<form id="crearRecursoForm">
+    {% csrf_token %}
+    <label for="id_recurso">ID Recurso:</label>
+    <input type="text" id="id_recurso" name="id_recurso" required><br><br>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <label for="abreviatura">Abreviatura:</label>
+    <input type="text" id="abreviatura" name="abreviatura" required><br><br>
+
+    <label for="metrica">Métrica:</label>
+    <input type="text" id="metrica" name="metrica" required><br><br>
+
+    <label for="tipo">Tipo:</label>
+    <input type="text" id="tipo" name="tipo" required><br><br>
+
+    <label for="valor_hora">Valor/hora:</label>
+    <input type="number" id="valor_hora" name="valor_hora" step="0.01" required><br><br>
+
+    <button type="submit">Crear Recurso</button>
+</form>
+
+<script>
+    document.getElementById('crearRecursoForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Evita que el formulario se envíe de forma tradicional
+
+        // Recolectamos los datos del formulario
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        // Enviamos los datos usando fetch
+        fetch('http://localhost:5000/api/crearRecurso', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',  // Asegúrate de que el Content-Type sea 'application/json'
+            },
+            body: JSON.stringify(data),  // Convertimos los datos a JSON
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+            return response.json();  // Procesa la respuesta JSON
+        })
+        .then(data => {
+            if (data.mensaje) {
+                alert(data.mensaje);  // Mostrar el mensaje de éxito
+            } else if (data.error) {
+                alert(`Error: ${data.error}`);  // Mostrar el mensaje de error
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Ocurrió un error al enviar los datos.');
+        });
+    });
+</script>
+
+<hr>
+
+<!-- Formulario para Crear Nueva Configuración -->
+<h3>Crear Nueva Configuración</h3>
+<form id="crearConfiguracionForm">
+    {% csrf_token %}
+    <label for="id_configuracion">ID Configuración:</label>
+    <input type="text" id="id_configuracion" name="id_configuracion" required><br><br>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" required></textarea><br><br>
+
+    <label for="id_categoria">ID Categoría:</label>
+    <input type="text" id="id_categoria" name="id_categoria" required><br><br>
+
+    <label for="parametros">Parámetros (opcional):</label>
+    <textarea id="parametros" name="parametros"></textarea><br><br>
+
+    <button type="submit">Crear Configuración</button>
+</form>
+
+<script>
+    document.getElementById('crearConfiguracionForm').addEventListener('submit', function(event) {
+        event.preventDefault();  // Evita que el formulario se envíe de forma tradicional
+
+        // Recolectamos los datos del formulario
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        // Enviamos los datos usando fetch
+        fetch('http://localhost:5000/api/crearConfiguracion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',  // Asegúrate de que el Content-Type sea 'application/json'
+            },
+            body: JSON.stringify(data),  // Convertimos los datos a JSON
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+            return response.json();  // Procesa la respuesta JSON
+        })
+        .then(data => {
+            if (data.mensaje) {
+                alert(data.mensaje);  // Mostrar el mensaje de éxito
+            } else if (data.error) {
+                alert(`Error: ${data.error}`);  // Mostrar el mensaje de error
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Ocurrió un error al enviar los datos.');
+        });
+    });
+</script>
+
+{% endblock %}

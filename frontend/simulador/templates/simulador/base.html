@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador Chapinas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'simulador/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'cargar_configuracion' %}">Cargar Configuración</a></li>
+            <li><a href="{% url 'consultar_datos' %}">Consultar Datos</a></li>
+            <li><a href="{% url 'crear_datos' %}">Crear Datos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
